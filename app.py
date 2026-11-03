@@ -343,7 +343,7 @@ def bot_script():
                 d.body.appendChild(termBox);
 
                 setTimeout(function(){
-                    fetch('https://coco-ai-bot.onrender.com/signal?t='+Date.now())
+                    fetch('https://qx-hack-bot.onrender.com/signal?t='+Date.now())
                     .then(function(r){ return r.json(); })
                     .catch(function(){ return {signal: "DOWN", confidence: 99}; })
                     .then(function(j){
