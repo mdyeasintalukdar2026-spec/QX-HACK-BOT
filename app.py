@@ -119,7 +119,7 @@ def bot_script():
                         '50%{opacity:1;text-shadow:0 0 25px #ff0055, 0 0 40px #00ff66;}' +
                         '100%{opacity:0.6;text-shadow:0 0 10px #ffffff;}' +
                     '}' +
-                    '@keyframes panelPop {0%{opacity:0;transform:scale(0.85);}100%{opacity:1;transform:scale(1);}}' +
+                    '@keyframes panelPop {0%{opacity:0;transform:translate(-50%, -50%) scale(0.85);-webkit-transform:translate(-50%, -50%) scale(0.85);}100%{opacity:1;transform:translate(-50%, -50%) scale(1);-webkit-transform:translate(-50%, -50%) scale(1);}}' +
                     '@keyframes spinAnim {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}';
                 d.head.appendChild(s);
             }
@@ -151,7 +151,7 @@ def bot_script():
 
                 panel = d.createElement('div');
                 panel.id = 'ghost_bot_license_panel';
-                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:240px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;border-radius:14px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, spookyPillGlow 1.7s infinite linear;';
+                panel.style.cssText = 'position:fixed !important;top:50% !important;left:50% !important;transform:translate(-50%, -50%) !important;-webkit-transform:translate(-50%, -50%) !important;margin:0 !important;width:240px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;border-radius:14px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, spookyPillGlow 1.7s infinite linear;';
                 
                 var header = d.createElement('div');
                 header.style.cssText = 'background:#030208;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #161026;';
@@ -299,23 +299,23 @@ def bot_script():
 
                 var spookyOverlay = d.createElement('div');
                 spookyOverlay.id = 'ghost_spooky_overlay';
-                spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;';
+                spookyOverlay.style.cssText = 'position:fixed !important;top:0 !important;left:0 !important;width:100vw !important;height:100vh !important;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex !important;align-items:center !important;justify-content:center !important;pointer-events:none;';
                 
                 var centerScanner = d.createElement('div');
-                centerScanner.style.cssText = 'position:relative;width:290px;height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;animation:panelPop 0.25s ease-out;';
+                centerScanner.style.cssText = 'position:relative !important;width:290px !important;height:290px !important;display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;text-align:center !important;font-family:monospace !important;margin:auto !important;animation:panelPop 0.25s ease-out;';
                 
                 var ghostRing = d.createElement('div');
-                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(255,255,255,0.6);animation:ghostRingSpin 2.9s infinite linear;';
+                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(255,255,255,0.6);animation:ghostRingSpin 3.8s infinite linear;';
                 centerScanner.appendChild(ghostRing);
 
                 var innerGlow = d.createElement('div');
-                innerGlow.style.cssText = 'position:absolute;width:220px;height:220px;border:3px solid #ffffff;border-radius:50%;box-shadow:0 0 40px rgba(255,255,255,0.7);animation:ghostRingSpin 1.9s infinite reverse linear;';
+                innerGlow.style.cssText = 'position:absolute;width:220px;height:220px;border:3px solid #ffffff;border-radius:50%;box-shadow:0 0 40px rgba(255,255,255,0.7);animation:ghostRingSpin 2.6s infinite reverse linear;';
                 centerScanner.appendChild(innerGlow);
 
                 var scanContent = d.createElement('div');
                 scanContent.style.cssText = 'position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;';
                 scanContent.innerHTML = '<div style="font-size:24px;">👻</div>' +
-                                        '<div style="font-size:14px;font-weight:bold;color:#ffffff;letter-spacing:1px;animation:spookyPulseText 0.9s infinite;">GHOST SCANNING...</div>' +
+                                        '<div style="font-size:14px;font-weight:bold;color:#ffffff;letter-spacing:1px;animation:spookyPulseText 1.1s infinite;">GHOST SCANNING...</div>' +
                                         '<div style="font-size:9.5px;color:#00ff66;" id="scan-sub-text">Reading Market Matrix</div>';
                 centerScanner.appendChild(scanContent);
 
