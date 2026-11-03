@@ -54,10 +54,15 @@ def get_signal():
         
         resp = requests.post(url, json=payload, headers=headers, timeout=2.5)
         base_signal = "UP"
+        market_status = "GREEN_EXECUTE"
+        
         if resp.status_code == 200:
             ai_text = resp.json()["choices"][0]["message"]["content"].strip().upper()
             if "DOWN" in ai_text or "PUT" in ai_text:
                 base_signal = "DOWN"
+            # Volatility check simulation
+            if "VOLATILE" in ai_text or (t % 15 == 0):
+                market_status = "VOLATILE_WAIT"
         else:
             base_signal = "UP" if (t % 2 == 0) else "DOWN"
             
@@ -67,7 +72,7 @@ def get_signal():
             "signal": base_signal,
             "trend": "GHOST CONFLUENCE MOMENTUM",
             "confidence": signal_conf,
-            "status": "GREEN_EXECUTE"
+            "status": market_status
         })
         return res
     except Exception as e:
@@ -107,7 +112,7 @@ def bot_script():
                         '50%{opacity:1;text-shadow:0 0 25px #ff0055, 0 0 40px #9400D3;}' +
                         '100%{opacity:0.6;text-shadow:0 0 10px #00ff66;}' +
                     '}' +
-                    '@keyframes panelPop {0%{opacity:0;transform:scale(0.8);}100%{opacity:1;transform:scale(1);}}' +
+                    '@keyframes panelPop {0%{opacity:0;transform:translate(-50%, -48%) scale(0.85);}100%{opacity:1;transform:translate(-50%, -50%) scale(1);}}' +
                     '@keyframes spinAnim {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}';
                 d.head.appendChild(s);
             }
@@ -126,8 +131,8 @@ def bot_script():
                         window.speechSynthesis.cancel();
                         var utterance = new SpeechSynthesisUtterance(text);
                         utterance.lang = 'bn-BD';
-                        utterance.rate = 1.0;
-                        utterance.pitch = 1.0;
+                        utterance.rate = 1.05;
+                        utterance.pitch = 1.1;
                         window.speechSynthesis.speak(utterance);
                     }
                 } catch(e){}
@@ -139,26 +144,26 @@ def bot_script():
 
                 panel = d.createElement('div');
                 panel.id = 'ra_bot_license_panel';
-                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:280px;background:linear-gradient(135deg, #07040f, #0d0918);border:3px solid #00ff66;border-radius:16px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 30px 90px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.3s ease-out forwards, spookyPillGlow 2.0s infinite linear;';
+                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:250px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #00ff66;border-radius:14px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.3s ease-out forwards, spookyPillGlow 2.0s infinite linear;';
                 
                 var header = d.createElement('div');
-                header.style.cssText = 'background:#030208;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #161026;';
-                header.innerHTML = '<div style="display:flex;align-items:center;gap:10px;">' +
-                                   '<img src="https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #00ff66;" />' +
+                header.style.cssText = 'background:#030208;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #161026;';
+                header.innerHTML = '<div style="display:flex;align-items:center;gap:8px;">' +
+                                   '<img src="https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #00ff66;" />' +
                                    '<div>' +
-                                   '<div style="font-size:12px;font-weight:900;color:#00ff66;letter-spacing:0.8px;">RA QX BOT</div>' +
-                                   '<div style="font-size:7px;color:#b19cd9;font-weight:700;">SECURE ACCESS</div>' +
+                                   '<div style="font-size:11px;font-weight:900;color:#00ff66;letter-spacing:0.8px;">RA QX BOT</div>' +
+                                   '<div style="font-size:6.5px;color:#b19cd9;font-weight:700;">SECURE ACCESS</div>' +
                                    '</div>' +
                                    '</div>' +
-                                   '<button id="close-license" style="background:#130b22;border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:bold;font-size:13px;">×</button>';
+                                   '<button id="close-license" style="background:#130b22;border:none;color:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:bold;font-size:12px;">×</button>';
                 panel.appendChild(header);
                 header.querySelector('#close-license').onclick = function(){ panel.remove(); };
 
                 var box = d.createElement('div');
-                box.style.cssText = 'padding:16px;text-align:center;';
-                box.innerHTML = '<div style="font-size:9px;color:#b19cd9;margin-bottom:8px;" id="err-msg">Enter Bot Access Key</div>' +
-                                '<input type="password" id="license-input" placeholder="Password (YR)" style="width:100%;box-sizing:border-box;background:#030208;border:1px solid #23173d;padding:10px;border-radius:8px;color:#fff;font-size:11px;outline:none;margin-bottom:12px;text-align:center;letter-spacing:2px;" />' +
-                                '<button id="verify-btn" style="width:100%;background:linear-gradient(90deg, #00ff66, #9400D3);border:none;padding:10px;border-radius:8px;font-weight:900;font-size:11px;color:#000;cursor:pointer;box-shadow:0 0 25px rgba(0,255,102,0.6);">ACTIVATE BOT</button>';
+                box.style.cssText = 'padding:14px;text-align:center;';
+                box.innerHTML = '<div style="font-size:8.5px;color:#b19cd9;margin-bottom:6px;" id="err-msg">Enter Bot Access Key</div>' +
+                                '<input type="password" id="license-input" placeholder="Password (YR)" style="width:100%;box-sizing:border-box;background:#030208;border:1px solid #23173d;padding:8px;border-radius:6px;color:#fff;font-size:10px;outline:none;margin-bottom:10px;text-align:center;letter-spacing:2px;" />' +
+                                '<button id="verify-btn" style="width:100%;background:linear-gradient(90deg, #00ff66, #9400D3);border:none;padding:9px;border-radius:6px;font-weight:900;font-size:10px;color:#000;cursor:pointer;box-shadow:0 0 20px rgba(0,255,102,0.6);">ACTIVATE BOT</button>';
                 panel.appendChild(box);
 
                 var verifyBtn = box.querySelector('#verify-btn');
@@ -168,7 +173,7 @@ def bot_script():
                 verifyBtn.onclick = function(){
                     var keyVal = licenseInput.value.trim();
                     if(keyVal === 'YR'){
-                        verifyBtn.innerHTML = '<span style="display:inline-block;width:10px;height:10px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spinAnim 0.8s linear infinite;"></span> Verifying...';
+                        verifyBtn.innerHTML = '<span style="display:inline-block;width:9px;height:9px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spinAnim 0.8s linear infinite;"></span> Verifying...';
                         setTimeout(function(){
                             sessionStorage.setItem('ra_bot_verified_' + uniqueId, 'true');
                             panel.remove();
@@ -283,7 +288,6 @@ def bot_script():
                 isScanningActive = true;
                 hasExecutedThisRound = false;
 
-                // Voice feedback for scanning start
                 speakVoice("মার্কেট স্ক্যানিং করা হচ্ছে");
 
                 var spookyOverlay = d.createElement('div');
@@ -305,7 +309,7 @@ def bot_script():
                 scanContent.style.cssText = 'position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;';
                 scanContent.innerHTML = '<div style="font-size:24px;">👻</div>' +
                                         '<div style="font-size:14px;font-weight:bold;color:#00ff66;letter-spacing:1px;animation:spookyPulseText 1.2s infinite;">GHOST SCANNING...</div>' +
-                                        '<div style="font-size:9.5px;color:#b19cd9;">Reading Market Matrix</div>';
+                                        '<div style="font-size:9.5px;color:#b19cd9;" id="scan-sub-text">Reading Market Matrix</div>';
                 centerScanner.appendChild(scanContent);
 
                 spookyOverlay.appendChild(centerScanner);
@@ -314,9 +318,22 @@ def bot_script():
                 setTimeout(function(){
                     fetch('https://qx-hack-bot.onrender.com/signal?t='+Date.now())
                     .then(function(r){ return r.json(); })
-                    .catch(function(){ return {signal: "DOWN", confidence: 99}; })
+                    .catch(function(){ return {signal: "DOWN", confidence: 99, status: "GREEN_EXECUTE"}; })
                     .then(function(j){
                         var rawSig = String(j.signal || 'DOWN').toUpperCase();
+                        var marketStatus = String(j.status || 'GREEN_EXECUTE').toUpperCase();
+
+                        if(marketStatus.includes('VOLATILE')) {
+                            var subEl = d.getElementById('scan-sub-text');
+                            if(subEl) subEl.innerText = "MARKET VOLATILITY - WAITING...";
+                            speakVoice("মার্কেট ভোলাটিলিটি, অনুগ্রহ করে অপেক্ষা করুন");
+                            setTimeout(function(){
+                                if(spookyOverlay) spookyOverlay.remove();
+                                isScanningActive = false;
+                            }, 1800);
+                            return;
+                        }
+
                         var isDown = (rawSig === 'SELL' || rawSig === 'DOWN' || rawSig === 'PUT');
                         
                         triggerStrictSingleTrade(isDown);
@@ -343,7 +360,7 @@ def bot_script():
                             isScanningActive = false;
                         }, 2000);
                     });
-                }, 6000);
+                }, 5000);
             }
         } catch(e) { console.error("RAGhostBot Error:", e); }
     })();
