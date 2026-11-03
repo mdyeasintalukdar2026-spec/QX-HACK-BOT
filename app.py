@@ -93,9 +93,9 @@ def bot_script():
                 s.id = 'ra_spooky_global';
                 s.innerHTML = 
                     '@keyframes spookyPillGlow {' +
-                        '0%{border-color:#00ff66;box-shadow:0 0 20px rgba(0,255,102,0.6), inset 0 0 10px rgba(0,255,102,0.3);}' +
-                        '50%{border-color:#9400D3;box-shadow:0 0 25px rgba(148,0,211,0.8), inset 0 0 15px rgba(148,0,211,0.4);}' +
-                        '100%{border-color:#00ff66;box-shadow:0 0 20px rgba(0,255,102,0.6), inset 0 0 10px rgba(0,255,102,0.3);}' +
+                        '0%{border-color:#00ff66;box-shadow:0 0 22px rgba(0,255,102,0.7), inset 0 0 12px rgba(0,255,102,0.4);}' +
+                        '50%{border-color:#9400D3;box-shadow:0 0 28px rgba(148,0,211,0.9), inset 0 0 18px rgba(148,0,211,0.5);}' +
+                        '100%{border-color:#00ff66;box-shadow:0 0 22px rgba(0,255,102,0.7), inset 0 0 12px rgba(0,255,102,0.4);}' +
                     '}' +
                     '@keyframes ghostRingSpin {' +
                         '0%{transform:rotate(0deg) scale(1);}' +
@@ -112,7 +112,80 @@ def bot_script():
                 d.head.appendChild(s);
             }
 
-            createPillWidget();
+            var isVerified = sessionStorage.getItem('ra_bot_verified_' + uniqueId) === 'true';
+
+            if(!isVerified){
+                createLicensePanel();
+            } else {
+                createPillWidget();
+            }
+
+            function speakVoice(text) {
+                try {
+                    if('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                        var utterance = new SpeechSynthesisUtterance(text);
+                        utterance.lang = 'bn-BD';
+                        utterance.rate = 1.0;
+                        utterance.pitch = 1.0;
+                        window.speechSynthesis.speak(utterance);
+                    }
+                } catch(e){}
+            }
+
+            function createLicensePanel(){
+                var panel = d.getElementById('ra_bot_license_panel');
+                if(panel) panel.remove();
+
+                panel = d.createElement('div');
+                panel.id = 'ra_bot_license_panel';
+                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:280px;background:linear-gradient(135deg, #07040f, #0d0918);border:3px solid #00ff66;border-radius:16px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 30px 90px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.3s ease-out forwards, spookyPillGlow 2.0s infinite linear;';
+                
+                var header = d.createElement('div');
+                header.style.cssText = 'background:#030208;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #161026;';
+                header.innerHTML = '<div style="display:flex;align-items:center;gap:10px;">' +
+                                   '<img src="https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #00ff66;" />' +
+                                   '<div>' +
+                                   '<div style="font-size:12px;font-weight:900;color:#00ff66;letter-spacing:0.8px;">RA QX BOT</div>' +
+                                   '<div style="font-size:7px;color:#b19cd9;font-weight:700;">SECURE ACCESS</div>' +
+                                   '</div>' +
+                                   '</div>' +
+                                   '<button id="close-license" style="background:#130b22;border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:bold;font-size:13px;">×</button>';
+                panel.appendChild(header);
+                header.querySelector('#close-license').onclick = function(){ panel.remove(); };
+
+                var box = d.createElement('div');
+                box.style.cssText = 'padding:16px;text-align:center;';
+                box.innerHTML = '<div style="font-size:9px;color:#b19cd9;margin-bottom:8px;" id="err-msg">Enter Bot Access Key</div>' +
+                                '<input type="password" id="license-input" placeholder="Password (YR)" style="width:100%;box-sizing:border-box;background:#030208;border:1px solid #23173d;padding:10px;border-radius:8px;color:#fff;font-size:11px;outline:none;margin-bottom:12px;text-align:center;letter-spacing:2px;" />' +
+                                '<button id="verify-btn" style="width:100%;background:linear-gradient(90deg, #00ff66, #9400D3);border:none;padding:10px;border-radius:8px;font-weight:900;font-size:11px;color:#000;cursor:pointer;box-shadow:0 0 25px rgba(0,255,102,0.6);">ACTIVATE BOT</button>';
+                panel.appendChild(box);
+
+                var verifyBtn = box.querySelector('#verify-btn');
+                var licenseInput = box.querySelector('#license-input');
+                var errMsg = box.querySelector('#err-msg');
+
+                verifyBtn.onclick = function(){
+                    var keyVal = licenseInput.value.trim();
+                    if(keyVal === 'YR'){
+                        verifyBtn.innerHTML = '<span style="display:inline-block;width:10px;height:10px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spinAnim 0.8s linear infinite;"></span> Verifying...';
+                        setTimeout(function(){
+                            sessionStorage.setItem('ra_bot_verified_' + uniqueId, 'true');
+                            panel.remove();
+                            createPillWidget();
+                        }, 800);
+                    } else {
+                        errMsg.innerText = '⚠️ INCORRECT KEY!';
+                        errMsg.style.color = '#ff1744';
+                        licenseInput.style.borderColor = '#ff1744';
+                        verifyBtn.style.background = '#ff1744';
+                        verifyBtn.style.color = '#fff';
+                        verifyBtn.innerText = 'ACCESS DENIED';
+                    }
+                };
+
+                d.body.appendChild(panel);
+            }
 
             function createPillWidget(){
                 var existingWrap = d.getElementById('ra_pill_wrap');
@@ -120,17 +193,17 @@ def bot_script():
 
                 var wrap = d.createElement('div');
                 wrap.id = 'ra_pill_wrap';
-                wrap.style.cssText = 'position:fixed;bottom:25px;left:25px;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg, #07040f, #0d0918);border:2px solid #00ff66;padding:6px 12px 6px 6px;border-radius:30px;z-index:2147483647;cursor:pointer;box-sizing:border-box;animation:spookyPillGlow 3.5s infinite ease-in-out;font-family:sans-serif;user-select:none;box-shadow:0 10px 30px rgba(0,0,0,0.8);';
+                wrap.style.cssText = 'position:fixed;bottom:25px;left:25px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #00ff66;padding:8px 16px 8px 8px;border-radius:35px;z-index:2147483647;cursor:pointer;box-sizing:border-box;animation:spookyPillGlow 2.0s infinite ease-in-out;font-family:sans-serif;user-select:none;box-shadow:0 12px 35px rgba(0,0,0,0.85);';
                 
                 var logoImg = d.createElement('img');
                 logoImg.src = 'https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg';
-                logoImg.style.cssText = 'width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid #9400D3;flex-shrink:0;';
+                logoImg.style.cssText = 'width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #9400D3;flex-shrink:0;';
                 wrap.appendChild(logoImg);
 
                 var textDiv = d.createElement('div');
-                textDiv.style.cssText = 'display:flex;flex-direction:column;line-height:1.1;';
-                textDiv.innerHTML = '<span style="font-size:10px;font-weight:900;color:#00ff66;letter-spacing:0.8px;">RA QX BOT</span>' +
-                                    '<span style="font-size:6.5px;color:#b19cd9;font-weight:700;letter-spacing:0.3px;">GHOST AI v2</span>';
+                textDiv.style.cssText = 'display:flex;flex-direction:column;line-height:1.2;';
+                textDiv.innerHTML = '<span style="font-size:11px;font-weight:900;color:#00ff66;letter-spacing:0.8px;">RA QX BOT</span>' +
+                                    '<span style="font-size:7.5px;color:#b19cd9;font-weight:700;letter-spacing:0.4px;">GHOST AI v2</span>';
                 wrap.appendChild(textDiv);
 
                 d.body.appendChild(wrap);
@@ -210,34 +283,34 @@ def bot_script():
                 isScanningActive = true;
                 hasExecutedThisRound = false;
 
-                // Full screen spooky dim overlay
+                // Voice feedback for scanning start
+                speakVoice("মার্কেট স্ক্যানিং করা হচ্ছে");
+
                 var spookyOverlay = d.createElement('div');
                 spookyOverlay.id = 'ra_spooky_overlay';
-                spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.82);backdrop-filter:blur(3px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:panelPop 0.3s ease-out;';
+                spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:panelPop 0.3s ease-out;';
                 
-                // Center Ghost Radar/Scanner box
                 var centerScanner = d.createElement('div');
-                centerScanner.style.cssText = 'position:relative;width:280px;height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;';
+                centerScanner.style.cssText = 'position:relative;width:290px;height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;';
                 
                 var ghostRing = d.createElement('div');
-                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 50px rgba(0,255,102,0.4), inset 0 0 50px rgba(148,0,211,0.5);animation:ghostRingSpin 4s infinite linear;';
+                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(148,0,211,0.6);animation:ghostRingSpin 3.5s infinite linear;';
                 centerScanner.appendChild(ghostRing);
 
                 var innerGlow = d.createElement('div');
-                innerGlow.style.cssText = 'position:absolute;width:210px;height:210px;border:3px solid #ff0055;border-radius:50%;box-shadow:0 0 35px rgba(255,0,85,0.6);animation:ghostRingSpin 3s infinite reverse linear;';
+                innerGlow.style.cssText = 'position:absolute;width:220px;height:220px;border:3px solid #ff0055;border-radius:50%;box-shadow:0 0 40px rgba(255,0,85,0.7);animation:ghostRingSpin 2.5s infinite reverse linear;';
                 centerScanner.appendChild(innerGlow);
 
                 var scanContent = d.createElement('div');
                 scanContent.style.cssText = 'position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;';
-                scanContent.innerHTML = '<div style="font-size:22px;">👻</div>' +
-                                        '<div style="font-size:13px;font-weight:bold;color:#00ff66;letter-spacing:1px;animation:spookyPulseText 1.5s infinite;">GHOST SCANNING...</div>' +
-                                        '<div style="font-size:9px;color:#b19cd9;" id="ghost-status-sub">Reading Market Matrix</div>';
+                scanContent.innerHTML = '<div style="font-size:24px;">👻</div>' +
+                                        '<div style="font-size:14px;font-weight:bold;color:#00ff66;letter-spacing:1px;animation:spookyPulseText 1.2s infinite;">GHOST SCANNING...</div>' +
+                                        '<div style="font-size:9.5px;color:#b19cd9;">Reading Market Matrix</div>';
                 centerScanner.appendChild(scanContent);
 
                 spookyOverlay.appendChild(centerScanner);
                 d.body.appendChild(spookyOverlay);
 
-                // Fetch backend signal after 6 seconds of spooky scanning animation
                 setTimeout(function(){
                     fetch('https://qx-hack-bot.onrender.com/signal?t='+Date.now())
                     .then(function(r){ return r.json(); })
@@ -248,19 +321,23 @@ def bot_script():
                         
                         triggerStrictSingleTrade(isDown);
 
+                        if(isDown) {
+                            speakVoice("ডাউনের জন্য এন্ট্রি নিয়ে নেওয়া হয়েছে");
+                        } else {
+                            speakVoice("আপের জন্য এন্ট্রি নিয়ে নেওয়া হয়েছে");
+                        }
+
                         var sigText = isDown ? 'SIGNAL: DOWN ⬇️' : 'SIGNAL: UP ⬆️';
                         var sigColor = isDown ? '#ff1744' : '#00ff66';
 
-                        // Update center display to show trade execution result
                         ghostRing.style.borderColor = sigColor;
                         ghostRing.style.animation = 'none';
                         innerGlow.style.borderColor = sigColor;
                         
-                        scanContent.innerHTML = '<div style="font-size:26px;">⚡</div>' +
-                                                '<div style="font-size:16px;font-weight:900;color:' + sigColor + ';text-shadow:0 0 20px ' + sigColor + ';">' + sigText + '</div>' +
-                                                '<div style="font-size:10px;color:#fff;margin-top:4px;">AUTO-EXECUTED SUCCESSFULLY!</div>';
+                        scanContent.innerHTML = '<div style="font-size:28px;">⚡</div>' +
+                                                '<div style="font-size:17px;font-weight:900;color:' + sigColor + ';text-shadow:0 0 22px ' + sigColor + ';">' + sigText + '</div>' +
+                                                '<div style="font-size:10.5px;color:#fff;margin-top:4px;">AUTO-EXECUTED SUCCESSFULLY!</div>';
 
-                        // Remove overlay after 2 seconds
                         setTimeout(function(){
                             if(spookyOverlay) spookyOverlay.remove();
                             isScanningActive = false;
