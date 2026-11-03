@@ -26,7 +26,7 @@ def add_cors_headers(response):
 
 @app.route('/')
 def home():
-    return "COCO AI Master Engine v360.0 [1.1M Nodes & 549 Rules Active] Running 24/7!"
+    return "RA QX Spooky Bot Engine v360.0 [Ghost Mode Active] Running 24/7!"
 
 @app.route('/ping')
 def ping():
@@ -45,7 +45,7 @@ def get_signal():
         payload = {
             "model": "llama-3.3-70b-versatile",
             "messages": [
-                {"role": "system", "content": "You are Coco AI institutional trading arbiter. Return ONLY 'UP' or 'DOWN' based on strict market momentum. No random outputs."},
+                {"role": "system", "content": "You are an elite institutional trading arbiter. Return ONLY 'UP' or 'DOWN' based on strict market momentum. No extra text."},
                 {"role": "user", "content": "Evaluate accurate market direction now:"}
             ],
             "temperature": 0.01,
@@ -65,7 +65,7 @@ def get_signal():
         
         res = jsonify({
             "signal": base_signal,
-            "trend": "AUTHENTIC CONFLUENCE MOMENTUM",
+            "trend": "GHOST CONFLUENCE MOMENTUM",
             "confidence": signal_conf,
             "status": "GREEN_EXECUTE"
         })
@@ -73,7 +73,7 @@ def get_signal():
     except Exception as e:
         res = jsonify({
             "signal": "UP",
-            "trend": "STRICT ARBITER GATE",
+            "trend": "GHOST ARBITER GATE",
             "confidence": 99,
             "status": "GREEN_EXECUTE"
         })
@@ -85,136 +85,53 @@ def bot_script():
     (function(){
         try {
             var d = document;
-            var uniqueId = 'coco_bot_' + Math.floor(Math.random() * 10000);
+            var uniqueId = 'ra_qx_bot_' + Math.floor(Math.random() * 10000);
             
-            var oldS = d.getElementById('coco_global');
+            var oldS = d.getElementById('ra_spooky_global');
             if(!oldS){
                 var s = d.createElement('style');
-                s.id = 'coco_global';
+                s.id = 'ra_spooky_global';
                 s.innerHTML = 
-                    '@keyframes ultraSmoothWhiteGlow {' +
-                        '0%{border-color:#ff0055;box-shadow:0 0 50px #ffffff, 0 0 25px #ff0055, inset 0 0 15px #ffffff;}' +
-                        '25%{border-color:#00ffff;box-shadow:0 0 50px #ffffff, 0 0 25px #00ffff, inset 0 0 15px #ffffff;}' +
-                        '50%{border-color:#00ff00;box-shadow:0 0 50px #ffffff, 0 0 25px #00ff00, inset 0 0 15px #ffffff;}' +
-                        '75%{border-color:#ffcc00;box-shadow:0 0 50px #ffffff, 0 0 25px #ffcc00, inset 0 0 15px #ffffff;}' +
-                        '100%{border-color:#ff0055;box-shadow:0 0 50px #ffffff, 0 0 25px #ff0055, inset 0 0 15px #ffffff;}' +
+                    '@keyframes spookyPillGlow {' +
+                        '0%{border-color:#00ff66;box-shadow:0 0 20px rgba(0,255,102,0.6), inset 0 0 10px rgba(0,255,102,0.3);}' +
+                        '50%{border-color:#9400D3;box-shadow:0 0 25px rgba(148,0,211,0.8), inset 0 0 15px rgba(148,0,211,0.4);}' +
+                        '100%{border-color:#00ff66;box-shadow:0 0 20px rgba(0,255,102,0.6), inset 0 0 10px rgba(0,255,102,0.3);}' +
                     '}' +
-                    '@keyframes cocoTopAnim {' +
-                        '0%{border-color:#ff0000;box-shadow:0 0 40px #ff0000;}' +
-                        '50%{border-color:#00ffff;box-shadow:0 0 40px #00ffff;}' +
-                        '100%{border-color:#ff0000;box-shadow:0 0 40px #ff0000;}' +
+                    '@keyframes ghostRingSpin {' +
+                        '0%{transform:rotate(0deg) scale(1);}' +
+                        '50%{transform:rotate(180deg) scale(1.08);}' +
+                        '100%{transform:rotate(360deg) scale(1);}' +
                     '}' +
-                    '@keyframes commProfileAnim {' +
-                        '0%{border-color:#00ff00;box-shadow:0 0 50px #00ff00;}' +
-                        '50%{border-color:#ff4500;box-shadow:0 0 50px #ff4500;}' +
-                        '100%{border-color:#00ff00;box-shadow:0 0 50px #00ff00;}' +
+                    '@keyframes spookyPulseText {' +
+                        '0%{opacity:0.6;text-shadow:0 0 10px #00ff66;}' +
+                        '50%{opacity:1;text-shadow:0 0 25px #ff0055, 0 0 40px #9400D3;}' +
+                        '100%{opacity:0.6;text-shadow:0 0 10px #00ff66;}' +
                     '}' +
-                    '@keyframes commBorderAnim {' +
-                        '0%{border-color:#fff700;box-shadow:0 0 40px #fff700;}' +
-                        '50%{border-color:#ff8c00;box-shadow:0 0 40px #ff8c00;}' +
-                        '100%{border-color:#fff700;box-shadow:0 0 40px #fff700;}' +
-                    '}' +
-                    '@keyframes termBorderAnim {' +
-                        '0%{border-color:#ffd700;box-shadow:0 0 50px #ffd700;}' +
-                        '50%{border-color:#00ffff;box-shadow:0 0 50px #00ffff;}' +
-                        '100%{border-color:#ffd700;box-shadow:0 0 50px #ffd700;}' +
-                    '}' +
-                    '@keyframes mainPanelAnim {' +
-                        '0%{border-color:#dc143c;box-shadow:0 0 60px #dc143c;}' +
-                        '50%{border-color:#00ff00;box-shadow:0 0 60px #00ff00;}' +
-                        '100%{border-color:#dc143c;box-shadow:0 0 60px #dc143c;}' +
-                    '}' +
-                    '@keyframes laserScanSmoothSlow {' +
-                        '0%{top:20px;opacity:0.9;}' +
-                        '50%{top:calc(100vh - 45px);opacity:1;}' +
-                        '100%{top:20px;opacity:0.9;}' +
-                    '}' +
-                    '@keyframes panelPop {0%{opacity:0;transform:translate(-50%, -45%) scale(0.9);}100%{opacity:1;transform:translate(-50%, -50%) scale(1);}}' +
+                    '@keyframes panelPop {0%{opacity:0;transform:scale(0.8);}100%{opacity:1;transform:scale(1);}}' +
                     '@keyframes spinAnim {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}';
                 d.head.appendChild(s);
             }
 
-            var isVerified = sessionStorage.getItem('coco_bot_verified_' + uniqueId) === 'true';
+            createPillWidget();
 
-            if(!isVerified){
-                createLicensePanel();
-            } else {
-                createFloatingBot();
-            }
-
-            function createLicensePanel(){
-                var panel = d.getElementById('coco_bot_license_panel');
-                if(panel) panel.remove();
-
-                panel = d.createElement('div');
-                panel.id = 'coco_bot_license_panel';
-                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:280px;background:#070b14;border:4px solid #dc143c;border-radius:15px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 40px 100px rgba(0,0,0,0.98);overflow:hidden;animation:panelPop 0.3s ease-out forwards, mainPanelAnim 2.5s infinite linear;';
-                
-                var header = d.createElement('div');
-                header.style.cssText = 'background:#03050a;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #131d2e;';
-                header.innerHTML = '<div style="display:flex;align-items:center;gap:10px;">' +
-                                   '<img src="https://i.postimg.cc/hGdbJVHR/IMG-20261102-WA0070.jpg" style="width:46px;height:46px;border-radius:50%;object-fit:cover;border:3px solid #ff0000;animation:cocoTopAnim 2.7s infinite linear;" />' +
-                                   '<div>' +
-                                   '<div style="font-size:12px;font-weight:900;color:#fff;letter-spacing:0.5px;">COCO AI BOT</div>' +
-                                   '<div style="font-size:6.5px;color:#ff00ff;font-weight:700;">SECURE LOGIN</div>' +
-                                   '</div>' +
-                                   '</div>' +
-                                   '<button id="close-license" style="background:#101826;border:none;color:#fff;width:22px;height:22px;border-radius:4px;cursor:pointer;font-weight:bold;font-size:12px;">×</button>';
-                panel.appendChild(header);
-                
-                header.querySelector('#close-license').onclick = function(){ panel.remove(); };
-
-                var licenseBox = d.createElement('div');
-                licenseBox.style.cssText = 'padding:14px;background:#070b14;text-align:center;';
-                licenseBox.innerHTML = '<div style="margin-bottom:8px;"><img src="https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:3px solid #00ff00;animation:commProfileAnim 2.0s infinite linear;" /></div>' +
-                                       '<a href="https://t.me/rahadtrader123" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#0d1526;border:2px solid #fff700;padding:8px;border-radius:8px;margin-bottom:10px;text-decoration:none;color:#fff;animation:commBorderAnim 2.7s infinite linear;">' +
-                                       '<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" style="width:20px;height:20px;" />' +
-                                       '<div style="text-align:left;"><div style="font-size:10px;font-weight:950;color:#00ff66;">R-A Trading Community</div><div style="font-size:6px;color:#8a99ad;">Click to Join Telegram</div></div>' +
-                                       '</a>' +
-                                       '<div style="font-size:7px;color:#8a99ad;margin-bottom:5px;" id="err-msg">Bot Access Key</div>' +
-                                       '<input type="password" id="license-input" placeholder="Bot Access Key" style="width:100%;box-sizing:border-box;background:#0d1526;border:1px solid #16253f;padding:8px;border-radius:6px;color:#fff;font-size:10px;outline:none;margin-bottom:10px;text-align:center;letter-spacing:1px;" />' +
-                                       '<button id="verify-btn" style="width:100%;background:linear-gradient(90deg, #dc143c, #00ff66);border:none;padding:9px;border-radius:6px;font-weight:900;font-size:10px;color:#000;cursor:pointer;box-shadow:0 0 35px rgba(0,255,102,0.9);">ACTIVATE BOT</button>';
-                panel.appendChild(licenseBox);
-
-                var verifyBtn = licenseBox.querySelector('#verify-btn');
-                var licenseInput = licenseBox.querySelector('#license-input');
-                var errMsg = licenseBox.querySelector('#err-msg');
-
-                verifyBtn.onclick = function(){
-                    var keyVal = licenseInput.value.trim();
-                    if(keyVal === 'RA'){
-                        verifyBtn.innerHTML = '<span style="display:inline-block;width:9px;height:9px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spinAnim 0.8s linear infinite;"></span> Verifying...';
-                        setTimeout(function(){
-                            sessionStorage.setItem('coco_bot_verified_' + uniqueId, 'true');
-                            panel.remove();
-                            createFloatingBot();
-                        }, 1000);
-                    } else {
-                        errMsg.innerText = '⚠️ INCORRECT KEY!';
-                        errMsg.style.color = '#ff1744';
-                        licenseInput.style.borderColor = '#ff1744';
-                        verifyBtn.style.background = '#ff1744';
-                        verifyBtn.style.color = '#fff';
-                        verifyBtn.innerText = 'ACCESS DENIED';
-                    }
-                };
-
-                d.body.appendChild(panel);
-            }
-
-            function createFloatingBot(){
-                var existingWrap = d.getElementById('coco_target_wrap');
+            function createPillWidget(){
+                var existingWrap = d.getElementById('ra_pill_wrap');
                 if(existingWrap) existingWrap.remove();
 
                 var wrap = d.createElement('div');
-                wrap.id = 'coco_target_wrap';
-                wrap.style.cssText = 'position:fixed;bottom:70px;left:20px;display:flex;flex-direction:column;align-items:center;z-index:2147483647;cursor:pointer;';
+                wrap.id = 'ra_pill_wrap';
+                wrap.style.cssText = 'position:fixed;bottom:25px;left:25px;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg, #07040f, #0d0918);border:2px solid #00ff66;padding:6px 12px 6px 6px;border-radius:30px;z-index:2147483647;cursor:pointer;box-sizing:border-box;animation:spookyPillGlow 3.5s infinite ease-in-out;font-family:sans-serif;user-select:none;box-shadow:0 10px 30px rgba(0,0,0,0.8);';
                 
-                var b = d.createElement('div');
-                b.id = 'coco_target_btn';
-                b.style.cssText = 'width:62px;height:62px;border-radius:50%;background:#030407;display:flex;align-items:center;justify-content:center;border:4px solid #ff0055;animation:ultraSmoothWhiteGlow 7.4s infinite ease-in-out;box-sizing:border-box;overflow:hidden;';
-                b.innerHTML = '<img src="https://i.postimg.cc/hGdbJVHR/IMG-20261102-WA0070.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />';
-                wrap.appendChild(b);
+                var logoImg = d.createElement('img');
+                logoImg.src = 'https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg';
+                logoImg.style.cssText = 'width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid #9400D3;flex-shrink:0;';
+                wrap.appendChild(logoImg);
+
+                var textDiv = d.createElement('div');
+                textDiv.style.cssText = 'display:flex;flex-direction:column;line-height:1.1;';
+                textDiv.innerHTML = '<span style="font-size:10px;font-weight:900;color:#00ff66;letter-spacing:0.8px;">RA QX BOT</span>' +
+                                    '<span style="font-size:6.5px;color:#b19cd9;font-weight:700;letter-spacing:0.3px;">GHOST AI v2</span>';
+                wrap.appendChild(textDiv);
 
                 d.body.appendChild(wrap);
                 
@@ -239,7 +156,7 @@ def bot_script():
                 
                 wrap.onclick = function(){
                     if(hasMoved) return;
-                    runLaserScanningAndTrade(wrap);
+                    runGhostScanningAndTrade();
                 };
             }
 
@@ -288,60 +205,39 @@ def bot_script():
 
             var isScanningActive = false;
 
-            function getCurrentMarketName() {
-                try {
-                    var selectors = [
-                        '.asset-select__current-item span', '.chart-instrument__name', '.mg-select__value', 
-                        '.asset-name', '.current-asset', '[class*="asset-select"]', '[class*="instrument"]',
-                        '.dropdown__selected', '.mg-select__selected', '[class*="asset-item__title"]'
-                    ];
-                    for(var i=0; i<selectors.length; i++){
-                        var els = d.querySelectorAll(selectors[i]);
-                        for(var k=0; k<els.length; k++){
-                            var txt = (els[k].innerText || '').trim().replace(/\\n/g, ' ');
-                            if(txt.length > 1 && txt.length < 25 && (txt.includes('/') || txt.includes('OTC') || txt.includes('USD') || txt.includes('EUR') || txt.includes('GBP') || txt.includes('CHF') || txt.includes('NZD'))){
-                                if(!txt.includes('Deposit') && !txt.includes('Payout') && !txt.includes('Timer')){
-                                    return txt;
-                                }
-                            }
-                        }
-                    }
-                    var allSpans = d.querySelectorAll('div, span');
-                    for(var m=0; m<allSpans.length; m++){
-                        var t = (allSpans[m].innerText || '').trim();
-                        if(t.match(/^[A-Z]{3}\/[A-Z]{3}(\s*\(OTC\))?$/)){
-                            return t;
-                        }
-                    }
-                } catch(e){}
-                return 'EUR/USD (OTC)';
-            }
-
-            function runLaserScanningAndTrade(botWrap){
+            function runGhostScanningAndTrade(){
                 if(isScanningActive) return;
                 isScanningActive = true;
                 hasExecutedThisRound = false;
 
-                var dimOverlay = d.createElement('div');
-                dimOverlay.id = 'coco_dim_overlay';
-                dimOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.45);backdrop-filter:blur(1.5px);z-index:2147483645;pointer-events:none;';
-                d.body.appendChild(dimOverlay);
+                // Full screen spooky dim overlay
+                var spookyOverlay = d.createElement('div');
+                spookyOverlay.id = 'ra_spooky_overlay';
+                spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.82);backdrop-filter:blur(3px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:panelPop 0.3s ease-out;';
+                
+                // Center Ghost Radar/Scanner box
+                var centerScanner = d.createElement('div');
+                centerScanner.style.cssText = 'position:relative;width:280px;height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;';
+                
+                var ghostRing = d.createElement('div');
+                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 50px rgba(0,255,102,0.4), inset 0 0 50px rgba(148,0,211,0.5);animation:ghostRingSpin 4s infinite linear;';
+                centerScanner.appendChild(ghostRing);
 
-                var laserLine = d.createElement('div');
-                laserLine.id = 'laser_scan_overlay';
-                laserLine.style.cssText = 'position:fixed;left:0;width:100vw;height:18px;background:linear-gradient(90deg, transparent, #ffffff, #00ffff, #ffffff, transparent);box-shadow:0 0 55px #ffffff, 0 0 110px #00ffff, 0 0 170px #ff00ff;z-index:2147483646;pointer-events:none;animation:laserScanSmoothSlow 1.66s ease-in-out 3;';
-                d.body.appendChild(laserLine);
+                var innerGlow = d.createElement('div');
+                innerGlow.style.cssText = 'position:absolute;width:210px;height:210px;border:3px solid #ff0055;border-radius:50%;box-shadow:0 0 35px rgba(255,0,85,0.6);animation:ghostRingSpin 3s infinite reverse linear;';
+                centerScanner.appendChild(innerGlow);
 
-                var activeMarket = getCurrentMarketName();
+                var scanContent = d.createElement('div');
+                scanContent.style.cssText = 'position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;';
+                scanContent.innerHTML = '<div style="font-size:22px;">👻</div>' +
+                                        '<div style="font-size:13px;font-weight:bold;color:#00ff66;letter-spacing:1px;animation:spookyPulseText 1.5s infinite;">GHOST SCANNING...</div>' +
+                                        '<div style="font-size:9px;color:#b19cd9;" id="ghost-status-sub">Reading Market Matrix</div>';
+                centerScanner.appendChild(scanContent);
 
-                var botRect = botWrap.getBoundingClientRect();
-                var termBox = d.createElement('div');
-                termBox.style.cssText = 'position:fixed;left:' + Math.max(10, botRect.left) + 'px;bottom:' + (window.innerHeight - botRect.top + 12) + 'px;background:rgba(7,11,20,0.95);border:3px solid #ffd700;color:#00ff66;padding:12px 16px;border-radius:10px;font-family:monospace;font-size:11px;box-shadow:0 0 50px rgba(255,215,0,0.8);z-index:2147483647;animation:termBorderAnim 2.0s infinite linear;min-width:185px;';
-                termBox.innerHTML = '<div style="color:#8a99ad;margin-bottom:4px;font-size:9px;">root@coco-ai:~#</div>' +
-                                    '<div style="color:#fff;font-weight:bold;margin-bottom:2px;" id="term-status">analyzing...</div>' +
-                                    '<div style="color:#00ffff;font-size:10px;" id="term-market">market: ' + activeMarket + '</div>';
-                d.body.appendChild(termBox);
+                spookyOverlay.appendChild(centerScanner);
+                d.body.appendChild(spookyOverlay);
 
+                // Fetch backend signal after 6 seconds of spooky scanning animation
                 setTimeout(function(){
                     fetch('https://qx-hack-bot.onrender.com/signal?t='+Date.now())
                     .then(function(r){ return r.json(); })
@@ -350,29 +246,29 @@ def bot_script():
                         var rawSig = String(j.signal || 'DOWN').toUpperCase();
                         var isDown = (rawSig === 'SELL' || rawSig === 'DOWN' || rawSig === 'PUT');
                         
-                        if(laserLine) laserLine.remove();
-                        if(dimOverlay) dimOverlay.remove();
-
                         triggerStrictSingleTrade(isDown);
 
-                        var sigText = isDown ? 'signal: DOWN ⬇️' : 'signal: UP ⬆️';
-                        var col = isDown ? '#ff1744' : '#00ff66';
-                        
-                        termBox.style.borderColor = col;
-                        var statusEl = termBox.querySelector('#term-status');
-                        if(statusEl){
-                            statusEl.innerText = sigText;
-                            statusEl.style.color = col;
-                        }
+                        var sigText = isDown ? 'SIGNAL: DOWN ⬇️' : 'SIGNAL: UP ⬆️';
+                        var sigColor = isDown ? '#ff1744' : '#00ff66';
 
+                        // Update center display to show trade execution result
+                        ghostRing.style.borderColor = sigColor;
+                        ghostRing.style.animation = 'none';
+                        innerGlow.style.borderColor = sigColor;
+                        
+                        scanContent.innerHTML = '<div style="font-size:26px;">⚡</div>' +
+                                                '<div style="font-size:16px;font-weight:900;color:' + sigColor + ';text-shadow:0 0 20px ' + sigColor + ';">' + sigText + '</div>' +
+                                                '<div style="font-size:10px;color:#fff;margin-top:4px;">AUTO-EXECUTED SUCCESSFULLY!</div>';
+
+                        // Remove overlay after 2 seconds
                         setTimeout(function(){
-                            if(termBox) termBox.remove();
+                            if(spookyOverlay) spookyOverlay.remove();
                             isScanningActive = false;
                         }, 2000);
                     });
-                }, 5000);
+                }, 6000);
             }
-        } catch(e) { console.error("CocoBot Error:", e); }
+        } catch(e) { console.error("RAGhostBot Error:", e); }
     })();
     """
     res = make_response(js)
