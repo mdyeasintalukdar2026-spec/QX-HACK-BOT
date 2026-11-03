@@ -45,10 +45,10 @@ def get_signal():
         payload = {
             "model": "llama-3.3-70b-versatile",
             "messages": [
-                {"role": "system", "content": "You are an elite institutional trading arbiter. Analyze live market momentum and candle patterns. Return strictly 'UP' or 'DOWN' based on accurate price action with balanced dynamic output."},
+                {"role": "system", "content": "You are an elite institutional trading arbiter. Analyze live market momentum and candle structures. Return strictly 'UP' or 'DOWN' with dynamic institutional balance. Avoid one-sided repetition."},
                 {"role": "user", "content": "Evaluate accurate market direction now:"}
             ],
-            "temperature": 0.05,
+            "temperature": 0.2,
             "max_tokens": 5
         }
         
@@ -299,10 +299,10 @@ def bot_script():
 
                 var spookyOverlay = d.createElement('div');
                 spookyOverlay.id = 'ghost_spooky_overlay';
-                spookyOverlay.style.cssText = 'position:fixed !important;top:0 !important;left:0 !important;width:100vw !important;height:100vh !important;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex !important;align-items:center !important;justify-content:center !important;pointer-events:none;';
+                spookyOverlay.style.cssText = 'position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; background:rgba(3,2,10,0.88) !important; backdrop-filter:blur(4px) !important; z-index:2147483647 !important; display:flex !important; align-items:center !important; justify-content:center !important; margin:0 !important; padding:0 !important;';
                 
                 var centerScanner = d.createElement('div');
-                centerScanner.style.cssText = 'position:relative !important;width:290px !important;height:290px !important;display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;text-align:center !important;font-family:monospace !important;margin:auto !important;animation:panelPop 0.25s ease-out;';
+                centerScanner.style.cssText = 'position:relative !important; width:290px !important; height:290px !important; display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; text-align:center !important; font-family:monospace !important; margin:auto !important; transform:none !important; animation:panelPop 0.25s ease-out;';
                 
                 var ghostRing = d.createElement('div');
                 ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(255,255,255,0.6);animation:ghostRingSpin 3.8s infinite linear;';
