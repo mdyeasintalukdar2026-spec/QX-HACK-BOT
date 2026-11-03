@@ -26,7 +26,7 @@ def add_cors_headers(response):
 
 @app.route('/')
 def home():
-    return "RA QX Spooky Bot Engine v360.0 [Ghost Mode Active] Running 24/7!"
+    return "GHOST AI BOT Engine v360.0 [Ghost Mode Active] Running 24/7!"
 
 @app.route('/ping')
 def ping():
@@ -45,7 +45,7 @@ def get_signal():
         payload = {
             "model": "llama-3.3-70b-versatile",
             "messages": [
-                {"role": "system", "content": "You are an elite institutional trading arbiter. Analyze live market momentum and candle patterns. Return strictly 'UP' or 'DOWN' based on accurate price action. Avoid bias."},
+                {"role": "system", "content": "You are an elite institutional trading arbiter. Analyze live market momentum and candle patterns. Return strictly 'UP' or 'DOWN' based on accurate price action with balanced dynamic output."},
                 {"role": "user", "content": "Evaluate accurate market direction now:"}
             ],
             "temperature": 0.05,
@@ -96,12 +96,12 @@ def bot_script():
     (function(){
         try {
             var d = document;
-            var uniqueId = 'ra_qx_bot_' + Math.floor(Math.random() * 10000);
+            var uniqueId = 'ghost_ai_bot_' + Math.floor(Math.random() * 10000);
             
-            var oldS = d.getElementById('ra_spooky_global');
+            var oldS = d.getElementById('ghost_spooky_global');
             if(!oldS){
                 var s = d.createElement('style');
-                s.id = 'ra_spooky_global';
+                s.id = 'ghost_spooky_global';
                 s.innerHTML = 
                     '@keyframes spookyPillGlow {' +
                         '0%{border-color:#ffffff;box-shadow:0 0 25px #ffffff, 0 0 12px rgba(0,255,102,0.9), inset 0 0 15px #ffffff;}' +
@@ -119,12 +119,12 @@ def bot_script():
                         '50%{opacity:1;text-shadow:0 0 25px #ff0055, 0 0 40px #00ff66;}' +
                         '100%{opacity:0.6;text-shadow:0 0 10px #ffffff;}' +
                     '}' +
-                    '@keyframes panelPop {0%{opacity:0;transform:translate(-50%, -50%) scale(0.85);}100%{opacity:1;transform:translate(-50%, -50%) scale(1);}}' +
+                    '@keyframes panelPop {0%{opacity:0;transform:scale(0.85);}100%{opacity:1;transform:scale(1);}}' +
                     '@keyframes spinAnim {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}';
                 d.head.appendChild(s);
             }
 
-            var isVerified = sessionStorage.getItem('ra_bot_verified_' + uniqueId) === 'true';
+            var isVerified = sessionStorage.getItem('ghost_bot_verified_' + uniqueId) === 'true';
 
             if(!isVerified){
                 createLicensePanel();
@@ -146,19 +146,19 @@ def bot_script():
             }
 
             function createLicensePanel(){
-                var panel = d.getElementById('ra_bot_license_panel');
+                var panel = d.getElementById('ghost_bot_license_panel');
                 if(panel) panel.remove();
 
                 panel = d.createElement('div');
-                panel.id = 'ra_bot_license_panel';
+                panel.id = 'ghost_bot_license_panel';
                 panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:240px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;border-radius:14px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, spookyPillGlow 1.7s infinite linear;';
                 
                 var header = d.createElement('div');
                 header.style.cssText = 'background:#030208;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #161026;';
                 header.innerHTML = '<div style="display:flex;align-items:center;gap:8px;">' +
-                                   '<img src="https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #ffffff;" />' +
+                                   '<img src="https://i.postimg.cc/tJHpmSwT/1793696511270.jpg" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #ffffff;" />' +
                                    '<div>' +
-                                   '<div style="font-size:11px;font-weight:900;color:#ffffff;letter-spacing:0.8px;">RA QX BOT</div>' +
+                                   '<div style="font-size:11px;font-weight:900;color:#ffffff;letter-spacing:0.8px;">GHOST AI BOT</div>' +
                                    '<div style="font-size:6.5px;color:#00ff66;font-weight:700;">SECURE ACCESS</div>' +
                                    '</div>' +
                                    '</div>' +
@@ -182,7 +182,7 @@ def bot_script():
                     if(keyVal === 'YR'){
                         verifyBtn.innerHTML = '<span style="display:inline-block;width:9px;height:9px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spinAnim 0.7s linear infinite;"></span> Verifying...';
                         setTimeout(function(){
-                            sessionStorage.setItem('ra_bot_verified_' + uniqueId, 'true');
+                            sessionStorage.setItem('ghost_bot_verified_' + uniqueId, 'true');
                             panel.remove();
                             createPillWidget();
                         }, 700);
@@ -200,21 +200,21 @@ def bot_script():
             }
 
             function createPillWidget(){
-                var existingWrap = d.getElementById('ra_pill_wrap');
+                var existingWrap = d.getElementById('ghost_pill_wrap');
                 if(existingWrap) existingWrap.remove();
 
                 var wrap = d.createElement('div');
-                wrap.id = 'ra_pill_wrap';
+                wrap.id = 'ghost_pill_wrap';
                 wrap.style.cssText = 'position:fixed;bottom:25px;left:25px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;padding:8px 16px 8px 8px;border-radius:35px;z-index:2147483647;cursor:pointer;box-sizing:border-box;animation:spookyPillGlow 1.7s infinite ease-in-out;font-family:sans-serif;user-select:none;box-shadow:0 12px 35px rgba(0,0,0,0.85);';
                 
                 var logoImg = d.createElement('img');
-                logoImg.src = 'https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg';
+                logoImg.src = 'https://i.postimg.cc/tJHpmSwT/1793696511270.jpg';
                 logoImg.style.cssText = 'width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #00ff66;flex-shrink:0;';
                 wrap.appendChild(logoImg);
 
                 var textDiv = d.createElement('div');
                 textDiv.style.cssText = 'display:flex;flex-direction:column;line-height:1.2;';
-                textDiv.innerHTML = '<span style="font-size:11px;font-weight:900;color:#ffffff;letter-spacing:0.8px;">RA QX BOT</span>' +
+                textDiv.innerHTML = '<span style="font-size:11px;font-weight:900;color:#ffffff;letter-spacing:0.8px;">GHOST AI BOT</span>' +
                                     '<span style="font-size:7.5px;color:#00ff66;font-weight:700;letter-spacing:0.4px;">GHOST AI v2</span>';
                 wrap.appendChild(textDiv);
 
@@ -298,11 +298,11 @@ def bot_script():
                 speakVoice("মার্কেট স্ক্যানিং করা হচ্ছে");
 
                 var spookyOverlay = d.createElement('div');
-                spookyOverlay.id = 'ra_spooky_overlay';
-                spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:panelPop 0.25s ease-out;';
+                spookyOverlay.id = 'ghost_spooky_overlay';
+                spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;';
                 
                 var centerScanner = d.createElement('div');
-                centerScanner.style.cssText = 'position:relative;width:290px;height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;margin:auto;';
+                centerScanner.style.cssText = 'position:relative;width:290px;height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;animation:panelPop 0.25s ease-out;';
                 
                 var ghostRing = d.createElement('div');
                 ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(255,255,255,0.6);animation:ghostRingSpin 2.9s infinite linear;';
@@ -369,7 +369,7 @@ def bot_script():
                     });
                 }, 5000);
             }
-        } catch(e) { console.error("RAGhostBot Error:", e); }
+        } catch(e) { console.error("GhostBot Error:", e); }
     })();
     """
     res = make_response(js)
