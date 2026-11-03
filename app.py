@@ -68,7 +68,6 @@ def get_signal():
             if "VOLATILE" in ai_text:
                 market_status = "VOLATILE_WAIT"
         else:
-            # Dynamic pseudo-random institutional parity check
             base_signal = "UP" if (t % 2 == 0) else "DOWN"
             
         signal_conf = 99
@@ -105,10 +104,10 @@ def bot_script():
                 s.id = 'ra_spooky_global';
                 s.innerHTML = 
                     '@keyframes spookyPillGlow {' +
-                        '0%{border-color:#ffffff;box-shadow:0 0 22px #ffffff, 0 0 10px rgba(0,255,102,0.7), inset 0 0 12px #ffffff;}' +
-                        '33%{border-color:#00ff66;box-shadow:0 0 25px #00ff66, 0 0 12px #9400D3, inset 0 0 15px #00ff66;}' +
-                        '66%{border-color:#9400D3;box-shadow:0 0 25px #9400D3, 0 0 12px #ff0055, inset 0 0 15px #9400D3;}' +
-                        '100%{border-color:#ffffff;box-shadow:0 0 22px #ffffff, 0 0 10px rgba(0,255,102,0.7), inset 0 0 12px #ffffff;}' +
+                        '0%{border-color:#ffffff;box-shadow:0 0 25px #ffffff, 0 0 12px rgba(0,255,102,0.9), inset 0 0 15px #ffffff;}' +
+                        '33%{border-color:#00ff66;box-shadow:0 0 28px #00ff66, 0 0 15px #9400D3, inset 0 0 18px #00ff66;}' +
+                        '66%{border-color:#ffffff;box-shadow:0 0 28px #ffffff, 0 0 15px #ff0055, inset 0 0 18px #ffffff;}' +
+                        '100%{border-color:#ffffff;box-shadow:0 0 25px #ffffff, 0 0 12px rgba(0,255,102,0.9), inset 0 0 15px #ffffff;}' +
                     '}' +
                     '@keyframes ghostRingSpin {' +
                         '0%{transform:rotate(0deg) scale(1);}' +
@@ -152,7 +151,7 @@ def bot_script():
 
                 panel = d.createElement('div');
                 panel.id = 'ra_bot_license_panel';
-                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:240px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;border-radius:14px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, spookyPillGlow 1.8s infinite linear;';
+                panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);width:240px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;border-radius:14px;z-index:2147483647;font-family:sans-serif;color:#fff;box-shadow:0 25px 80px rgba(0,0,0,0.95);overflow:hidden;animation:panelPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, spookyPillGlow 1.7s infinite linear;';
                 
                 var header = d.createElement('div');
                 header.style.cssText = 'background:#030208;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #161026;';
@@ -206,7 +205,7 @@ def bot_script():
 
                 var wrap = d.createElement('div');
                 wrap.id = 'ra_pill_wrap';
-                wrap.style.cssText = 'position:fixed;bottom:25px;left:25px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;padding:8px 16px 8px 8px;border-radius:35px;z-index:2147483647;cursor:pointer;box-sizing:border-box;animation:spookyPillGlow 1.8s infinite ease-in-out;font-family:sans-serif;user-select:none;box-shadow:0 12px 35px rgba(0,0,0,0.85);';
+                wrap.style.cssText = 'position:fixed;bottom:25px;left:25px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg, #07040f, #0d0918);border:2.5px solid #ffffff;padding:8px 16px 8px 8px;border-radius:35px;z-index:2147483647;cursor:pointer;box-sizing:border-box;animation:spookyPillGlow 1.7s infinite ease-in-out;font-family:sans-serif;user-select:none;box-shadow:0 12px 35px rgba(0,0,0,0.85);';
                 
                 var logoImg = d.createElement('img');
                 logoImg.src = 'https://i.postimg.cc/JzRR8g6M/IMG-20261102-WA0003.jpg';
@@ -303,20 +302,20 @@ def bot_script():
                 spookyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(3,2,10,0.85);backdrop-filter:blur(3.5px);z-index:2147483645;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:panelPop 0.25s ease-out;';
                 
                 var centerScanner = d.createElement('div');
-                centerScanner.style.cssText = 'position:relative;width:290px;height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;';
+                centerScanner.style.cssText = 'position:relative;width:290px;height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:monospace;margin:auto;';
                 
                 var ghostRing = d.createElement('div');
-                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(255,255,255,0.6);animation:ghostRingSpin 3.1s infinite linear;';
+                ghostRing.style.cssText = 'position:absolute;width:100%;height:100%;border:4px dashed #00ff66;border-radius:50%;box-shadow:0 0 55px rgba(0,255,102,0.5), inset 0 0 55px rgba(255,255,255,0.6);animation:ghostRingSpin 2.9s infinite linear;';
                 centerScanner.appendChild(ghostRing);
 
                 var innerGlow = d.createElement('div');
-                innerGlow.style.cssText = 'position:absolute;width:220px;height:220px;border:3px solid #ffffff;border-radius:50%;box-shadow:0 0 40px rgba(255,255,255,0.7);animation:ghostRingSpin 2.1s infinite reverse linear;';
+                innerGlow.style.cssText = 'position:absolute;width:220px;height:220px;border:3px solid #ffffff;border-radius:50%;box-shadow:0 0 40px rgba(255,255,255,0.7);animation:ghostRingSpin 1.9s infinite reverse linear;';
                 centerScanner.appendChild(innerGlow);
 
                 var scanContent = d.createElement('div');
                 scanContent.style.cssText = 'position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;';
                 scanContent.innerHTML = '<div style="font-size:24px;">👻</div>' +
-                                        '<div style="font-size:14px;font-weight:bold;color:#ffffff;letter-spacing:1px;animation:spookyPulseText 1.0s infinite;">GHOST SCANNING...</div>' +
+                                        '<div style="font-size:14px;font-weight:bold;color:#ffffff;letter-spacing:1px;animation:spookyPulseText 0.9s infinite;">GHOST SCANNING...</div>' +
                                         '<div style="font-size:9.5px;color:#00ff66;" id="scan-sub-text">Reading Market Matrix</div>';
                 centerScanner.appendChild(scanContent);
 
